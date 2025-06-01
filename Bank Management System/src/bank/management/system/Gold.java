@@ -272,6 +272,7 @@ String query = "INSERT INTO creditcard VALUES(" + accno + ", '" + jobtitle + "',
                 frame1.setVisible(false);
                 new Facilities(cardno);
                 
+                
              }
 
                

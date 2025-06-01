@@ -248,7 +248,7 @@ this.cardno=cardno;
             else  {
             DataConnection db =new DataConnection();
                 try{
-                   String query = "UPDATE MainTable SET balance = '" + samount + "' WHERE cardno = '" + accno + "'";
+                   String query = "UPDATE MainTable SET bal = '" + sAmount + "' WHERE cardno = '" + cardno + "'";
 
 
                  db.s.executeUpdate(query);

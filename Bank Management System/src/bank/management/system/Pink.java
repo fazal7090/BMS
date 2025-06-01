@@ -1,293 +1,155 @@
 package bank.management.system;
 
-import java.awt.*;
-import static java.awt.Font.BOLD;
-import java.awt.event.ActionEvent;
 import javax.swing.*;
-import java.awt.event.ActionListener;
-import static java.lang.Double.parseDouble;
-import static java.lang.Integer.parseInt;
-import javax.swing.JOptionPane;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.*;
+import java.awt.event.*;
+import java.sql.*;
 
-public class Pink  implements ActionListener {
-        private JFrame frame1=new JFrame();
+public class Pink implements ActionListener {
+    private final JFrame frame;
+    private final JTextField jobField, incomeField, fineField;
+    private final JComboBox<String> creditLimitCombo;
+    private final JRadioButton salariedBtn, businessBtn;
+    private final ButtonGroup empGroup;
+    private final String cardno;
+    private final int accno;
 
-    JPanel panel;
-    JComboBox creditlimshow;  String[] cre={"20,000 Rupees", "25,000 Rupees", "30,000 Rupees", "35,000 Rupees"};
-    JRadioButton SalPer, Businessman;  
-    ButtonGroup emp;
-    JButton back, crelimenter,confirm;
-            
+    public Pink(String cardno) {
+        this.cardno = cardno;
+        this.accno = Integer.parseInt(cardno);
 
-    
-    JLabel intro, intro1, EmpType, Job, income, Creditlim,fine,minincome;
-    JTextField jobentered, incomeentered,fineshow;
-    String cardno;
-    int accno;
-    Pink(String cardno)
-            
-    {
-        this.cardno=cardno;
-        accno=Integer.parseInt(cardno);
-        frame1.setSize(1350,700);
-        frame1.setLocation(00,00); frame1.setLayout(null);
-        frame1.setResizable(false);
-        //frame
-        
-        
-        
-        //panel
-        panel=new JPanel();
-        panel.setBounds(0,0,1350,83);
-        String yellow="#EFCC00";
-        panel.setBackground(Color.decode(yellow));
-        panel.setLayout(null);
-        frame1.add(panel);
-        
-        //MCS BANK label
-        JLabel MCS=new JLabel("MCS BANK");
-        MCS.setBounds(20,15,185,50);
-        MCS.setForeground(Color.WHITE);
-        Font font=new Font("Segoe UI", BOLD, 32);
-        MCS.setFont(font);
-        panel.add(MCS);
-        
-        //back button
-         back=new JButton("Back");
-        Font font1=new Font("Segoe UI", BOLD, 32);
-        back.setFont(font1);
-        back.setBounds(1170,12,130,50);
-        back.setBackground(Color.decode(yellow));
-        back.setBorder(BorderFactory.createLineBorder(Color.WHITE));
-        back.setForeground(Color.WHITE);
-        back.addActionListener(this);
-        frame1.add(back);
-        
-        //intro label
-        intro=new JLabel("Apply for Pink Credit Card");
-        Font font2=new Font("Segoe UI", BOLD, 30);
-        intro.setFont(font2);
-        intro.setBounds(530,95,700,50);
-        intro.setForeground(Color.decode(yellow));
-        frame1.add(intro);
-        
-        //intro1 label
-        intro1=new JLabel("Easy solution to your financial needs");
-        Font font3=new Font("Segoe UI", BOLD, 30);
-        intro1.setFont(font3);
-        intro1.setBounds(440,145,700,50);
-        intro1.setForeground(Color.decode(yellow));
-        frame1.add(intro1);
-        
-        //employment type label
-       EmpType=new JLabel("Employment Type");
-       Font font4=new Font("Segoe UI", BOLD, 22);
-       EmpType.setFont(font4);
-       EmpType.setBounds(60,245,200,50);
-       frame1.add(EmpType);
-      
-        //salaried person radio button
-        SalPer=new JRadioButton("Salaried Person");
-        SalPer.setFont(font4);
-         SalPer.setBounds(325,248,200,50);
-         SalPer.addActionListener(this);
-         frame1.add(SalPer);
-         
-        //businessman radio button
-        Businessman=new JRadioButton("Businessman");
-        Businessman.setFont(font4);
-        Businessman.setBounds(530,248,220,50);
-        Businessman.addActionListener(this);
-        frame1.add(Businessman);
-         
-         //for single option
-         emp=new ButtonGroup();
-         emp.add(SalPer);
-         emp.add(Businessman);
-         
-          //income label
-        Job=new JLabel("Job Title/Bussiness");
-        Font font5=new Font("Segoe UI", BOLD, 22);
-        Job.setFont(font5);
-        Job.setBounds(60,310,300,50);
-        frame1.add(Job);
-        
-        //income text field
-        jobentered=new JTextField();
-        jobentered.setBounds(325,310,300,35);
-        frame1.add(jobentered);
-        Font font6=new Font("Segoe UI", BOLD, 18);
+        frame = new JFrame("Apply for Pink Credit Card");
+        frame.setSize(800, 600);
+        frame.setLayout(null);
+        frame.setLocationRelativeTo(null);
 
-       
-         //LOAN label
-        income=new JLabel("Monthly Net Income");
-       income.setFont(font5);
-        income.setBounds(60,375,300,50);
-        frame1.add(income);
-        
-         minincome=new JLabel("(Minimun Income =Rs.70,000) ");
-       minincome.setFont(font5);
-        minincome.setBounds(60,420,400,50);
-        frame1.add(minincome);
-        
-        
-        //loan text field
-        incomeentered=new JTextField();
-        incomeentered.setBounds(325,385,300,35);
-        frame1.add(incomeentered);
-        
-        
-       
-        
-        Creditlim=new JLabel("Credit Limit");
-       Creditlim.setFont(font5);
-        Creditlim.setBounds(60,475,300,50);
-        frame1.add(Creditlim);
-        
-         //repay dropdown
-         creditlimshow=new JComboBox(cre);
-         creditlimshow.setBounds(325,475, 150,40);
-         frame1.add(creditlimshow);
-         
-        
-        //repay_enter button
-        crelimenter=new JButton("Enter");
-        crelimenter.setFont(font6);
-        crelimenter.setBounds(510,475,100,40);
-        crelimenter.setBackground(Color.decode(yellow));
-        crelimenter.setForeground(Color.WHITE);
-        crelimenter.addActionListener(this);
-        frame1.add(crelimenter);
-       
-        // Fine
-         fine=new JLabel("Corresponding Fine");
-       fine.setFont(font5);
-        fine.setBounds(60,540,300,50);
-        frame1.add(fine);
-        
-         //repay dropdown
-         fineshow=new JTextField();
-         fineshow.setBounds(325,550, 200,35);
-         frame1.add(fineshow);
-         
-         //Confirm button
-        confirm =new JButton("CONFIRM");
-        confirm.setFont(font1);
-        confirm.setBounds(1100,600,170,50);
-        confirm.setBackground(Color.decode(yellow));
-        confirm.setBorder(BorderFactory.createLineBorder(Color.WHITE));
-        confirm.setForeground(Color.WHITE);
-        confirm.addActionListener(this);
-        frame1.add(confirm);
-     
-         
-       
-        
-        ImageIcon i4=new ImageIcon(ClassLoader.getSystemResource("icons/g5.PNG"));// importing 
-        //image from another class
-        Image i5=i4.getImage().getScaledInstance(350, 200,Image.SCALE_DEFAULT);//for setting h,w,l otherwise will be very Large
-        ImageIcon i6 = new ImageIcon(i5);//we are converting iage into imageicon bec jlabel cant work with image
-         JLabel label1=new JLabel(i6);// imagesicon cant be directly placed on frames so passing it in jlabel
-       // and then placing it  on frame
-        label1.setBounds(850, 250, 350, 200);//for setting the loc of image otherwise will be centered
-        //1st arg horiontal distance from frame 2nd arg vertical dis from fram ,3rd 4th l anh h of image as passed in line 13
-        frame1.add(label1);//adding image on to frame after convertingit in obj of jlabel
-        
-        frame1.setVisible(true);    }
-    double incinp; 
-public void actionPerformed(ActionEvent ae){
-         
+        JPanel header = new JPanel();
+        header.setBounds(0, 0, 800, 70);
+        header.setBackground(Color.decode("#EFCC00"));
+        header.setLayout(null);
 
-    if (ae.getSource()==back)
-    {
-        frame1.setVisible(false);
-      //  new CreditCard();
-        
+        JLabel title = new JLabel("MCS BANK");
+        title.setFont(new Font("Segoe UI", Font.BOLD, 28));
+        title.setForeground(Color.WHITE);
+        title.setBounds(20, 10, 300, 50);
+        header.add(title);
+
+        JButton backBtn = new JButton("Back");
+        backBtn.setBounds(680, 20, 80, 30);
+        backBtn.addActionListener(this);
+        header.add(backBtn);
+
+        frame.add(header);
+
+        JLabel heading = new JLabel("Apply for Pink Credit Card");
+        heading.setFont(new Font("Segoe UI", Font.BOLD, 22));
+        heading.setBounds(240, 80, 400, 30);
+        frame.add(heading);
+
+        JLabel empLabel = new JLabel("Employment Type:");
+        empLabel.setBounds(100, 140, 200, 25);
+        frame.add(empLabel);
+
+        salariedBtn = new JRadioButton("Salaried Person");
+        salariedBtn.setBounds(300, 140, 150, 25);
+        frame.add(salariedBtn);
+
+        businessBtn = new JRadioButton("Businessman");
+        businessBtn.setBounds(460, 140, 150, 25);
+        frame.add(businessBtn);
+
+        empGroup = new ButtonGroup();
+        empGroup.add(salariedBtn);
+        empGroup.add(businessBtn);
+
+        JLabel jobLabel = new JLabel("Job Title/Business:");
+        jobLabel.setBounds(100, 180, 200, 25);
+        frame.add(jobLabel);
+
+        jobField = new JTextField();
+        jobField.setBounds(300, 180, 200, 25);
+        frame.add(jobField);
+
+        JLabel incomeLabel = new JLabel("Monthly Net Income:");
+        incomeLabel.setBounds(100, 220, 200, 25);
+        frame.add(incomeLabel);
+
+        incomeField = new JTextField();
+        incomeField.setBounds(300, 220, 200, 25);
+        frame.add(incomeField);
+
+        JLabel creditLimitLabel = new JLabel("Credit Limit:");
+        creditLimitLabel.setBounds(100, 260, 200, 25);
+        frame.add(creditLimitLabel);
+
+        String[] creditOptions = {"20,000 Rupees", "25,000 Rupees", "30,000 Rupees", "35,000 Rupees"};
+        creditLimitCombo = new JComboBox<>(creditOptions);
+        creditLimitCombo.setBounds(300, 260, 200, 25);
+        frame.add(creditLimitCombo);
+
+        JLabel fineLabel = new JLabel("Corresponding Fine:");
+        fineLabel.setBounds(100, 300, 200, 25);
+        frame.add(fineLabel);
+
+        fineField = new JTextField();
+        fineField.setBounds(300, 300, 200, 25);
+        frame.add(fineField);
+
+        creditLimitCombo.addActionListener(e -> {
+            String selected = (String) creditLimitCombo.getSelectedItem();
+            switch (selected) {
+                case "20,000 Rupees" -> fineField.setText("Rs. 500 over period of one month");
+                case "25,000 Rupees" -> fineField.setText("Rs. 1000 over period of month");
+                case "30,000 Rupees" -> fineField.setText("Rs. 1200 over period of month");
+                case "35,000 Rupees" -> fineField.setText("Rs. 1500 over period of one month");
+            }
+        });
+
+        JButton confirmBtn = new JButton("Confirm");
+        confirmBtn.setBounds(300, 350, 100, 30);
+        confirmBtn.addActionListener(this);
+        frame.add(confirmBtn);
+
+        frame.setVisible(true);
     }
-  
-     else if (ae.getSource()==crelimenter)
-      {
-             String selected = (String) creditlimshow.getSelectedItem();
 
-           if(selected.equals(cre[0])){
-             fineshow.setText("Rs. 500 over period of one month");
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        String incomeStr = incomeField.getText();
+        String jobTitle = jobField.getText();
+        String fine = fineField.getText();
+        String empType = salariedBtn.isSelected() ? "Salaried Person" : businessBtn.isSelected() ? "Businessman" : "";
+        String creditStr = (String) creditLimitCombo.getSelectedItem();
+        String creditClean = creditStr.replaceAll("[^\\d]", "");
+        double credit = Double.parseDouble(creditClean);
+        String cardname = "Pink Credit Card";
+
+        if (incomeStr.isEmpty() || jobTitle.isEmpty() || empType.isEmpty() || fine.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Fill all the required fields");
+            return;
         }
-            
-          else if(selected.equals(cre[1])){
-             fineshow.setText("Rs. 1000 over period of month");
+
+        double income = Double.parseDouble(incomeStr);
+        if (income < 70000) {
+            JOptionPane.showMessageDialog(null, "You are not eligible to apply for this credit card.");
+            return;
         }
-          else if(selected.equals(cre[2])){
-             fineshow.setText("Rs. 1200 over period of month");
-        }
-          else if(selected.equals(cre[3])){
-             fineshow.setText("Rs. 1500 over period of one month");
-        }
-          
-         
-      }
-      else if (ae.getSource()==confirm)
-        {
-            String income=incomeentered.getText();
-String jobtitle=jobentered.getText();
-String emptype=null;
-String selectcredit=(String) creditlimshow.getSelectedItem();
-String cardname="Pink Credit Card";
-if (SalPer.isSelected())
-{
-    emptype="Salaried Person";
-}
-else if (Businessman.isSelected())
-{
-    emptype="Bussiness man";
-}
-       
-String fine=fineshow.getText();
 
-    if (incomeentered.getText().isEmpty()||jobentered.getText().equals("")||emptype.equals("")||fineshow.getText().equals(""))
-    {
-                JOptionPane.showMessageDialog(null, "Fill all the required fields");
-}
-    else 
-    {
-int inc = Integer.parseInt(income);
-
-if (inc<70000)
-{
-                     JOptionPane.showMessageDialog(null, "You are not eligible to apply for this credit card.");
-//new CreditCard();   
-}
-else if(inc>70000)
-{
-    
-     try {
-           
-
-
-      
-String query = "INSERT INTO creditcard VALUES(" + accno + ", '" + jobtitle + "', '" + emptype + "', '" + income + "', '" + selectcredit + "', '" + fine + "', '" + cardname + "')";
-
-
-                DataConnection c = new DataConnection();
-                c.s.executeUpdate(query);
-                JOptionPane.showMessageDialog(null, "Credit Card Details Inserted Successfully");
-                frame1.setVisible(false);
-                new Facilities(cardno);
-                        //        new Facilities();
-
-                
-             }
-
-               
-             catch (Exception e) {
-               System.out.println(e);
-            }}
+        try {
+            String query = "INSERT INTO creditcard (cardno, jobtitle, emptype, income, selectcredit, fine, cardname) VALUES ('"
+                    + accno + "', '" + jobTitle + "', '" + empType + "', " + income + ", " + credit + ", '" + fine + "', '" + cardname + "')";
+            DataConnection c = new DataConnection();
+            c.s.executeUpdate(query);
+            JOptionPane.showMessageDialog(null, "Credit Card Details Inserted Successfully");
+            frame.dispose();
+            new Facilities(cardno);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error while inserting data");
         }
     }
-     }
+
     public static void main(String[] args) {
-        Pink a =new Pink("12");
+        new Pink("12");
     }
-    
 }

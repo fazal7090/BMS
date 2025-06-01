@@ -13,7 +13,7 @@ execution. When a program encounters an error in the try block, it throws an exc
 in the catch block.This prevents the program from crashing and allows it to gracefully recover from the error.*/
      {//as MYSQL is external entity so it is likely to throw runtime error
         /*EXCEPTIONAL HANDLING*/ try{
-      Class.forName("com.mysql.jdbc.Driver");  //registring driver 1st step
+    
 /*2nd step*/c =DriverManager.getConnection("jdbc:mysql:///bank_management_system2","root","goatcr77");//onnceting with database 
 /*3rd step*/s =c.createStatement(); //3rd step
 

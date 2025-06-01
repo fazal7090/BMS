@@ -1,122 +1,102 @@
 package bank.management.system;
+
 import java.awt.*;
-import static java.awt.Font.BOLD;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
 import java.awt.event.ActionListener;
-import static java.lang.Double.parseDouble;
-import static java.lang.Integer.parseInt;
-import javax.swing.JOptionPane;
 
-public class Branchless extends JFrame implements ActionListener{
-    JPanel panel;
-    JLabel MCS;
-    JButton back, bills, mobile_package;
-    
-    Branchless(){
-          //frame
-        setSize(1366,768);
-        setLocation(0,0); setLayout(null);
+public class Branchless extends JFrame implements ActionListener {
+    private final JPanel headerPanel;
+    private final JButton backBtn, billsBtn, mobileBtn;
+    private final String cardno;
+
+    public Branchless(String cardno) {
+        this.cardno = cardno;
+
+        setTitle("Branchless Banking");
+        setSize(900, 600);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(null);
         setResizable(false);
-        
-        //panel
-        panel=new JPanel();
-        panel.setBounds(0,0,1366,80);
-        String yellow="#EFCC00";
-        panel.setBackground(Color.decode(yellow));
-        panel.setLayout(null);
-        add(panel);
-        
-        //MCS BANK label
-        JLabel MCS=new JLabel("MCS BANK");
-        MCS.setBounds(20,10,220,50);
-        MCS.setForeground(Color.WHITE);
-        Font font=new Font("Segoe UI", BOLD, 40);
-        MCS.setFont(font);
-        panel.add(MCS);
-        
-        //back button
-         back=new JButton("Back");
-        Font font1=new Font("Segoe UI", BOLD, 20);
-        back.setFont(font1);
-        back.setBounds(1250,17,60,35);
-        back.setBackground(Color.decode(yellow));
-        back.setBorder(BorderFactory.createLineBorder(Color.WHITE));
-        back.setForeground(Color.WHITE);
-        back.addActionListener(this);
-        add(back);
-        
-        //bills button
-         bills=new JButton("Utility Bills");
-        Font font2=new Font("Segoe UI", BOLD, 40);
-        bills.setFont(font2);
-        bills.setBounds(320,520,220,60);
-        String c="#f0ecec";
-        bills.setBorder(BorderFactory.createLineBorder(Color.decode(c)));
-        bills.setBackground(Color.decode(c));
-        bills.setForeground(Color.BLACK);
-        bills.addActionListener(this);
-        add(bills);
-        
-        //mobile_package button
-         mobile_package=new JButton("Mobile Packages");
-        mobile_package.setFont(font2);
-        mobile_package.setBounds(720,520,350,60);
-        mobile_package.setBorder(BorderFactory.createLineBorder(Color.decode(c)));
-        mobile_package.setBackground(Color.decode(c));
-        mobile_package.setForeground(Color.BLACK);
-        mobile_package.addActionListener(this);
-        add(mobile_package);
-        
-         //images
-        
-        //bill image
-        ImageIcon im=new ImageIcon(ClassLoader.getSystemResource("logo/bill.png"));
-        Image i=im.getImage().getScaledInstance(250,250, Image.SCALE_DEFAULT);
-        ImageIcon IM=new ImageIcon(i);
-        JLabel label = new JLabel(IM);
-        label.setBounds(280,230,250,250);
-        add(label);
-        
-        //mob package image
-        ImageIcon im1=new ImageIcon(ClassLoader.getSystemResource("logo/mobile.png"));
-        Image i1=im1.getImage().getScaledInstance(320,310, Image.SCALE_DEFAULT);
-        ImageIcon IM1=new ImageIcon(i1);
-        JLabel label1 = new JLabel(IM1);
-        label1.setBounds(735,200,320,310);
-        add(label1);
-        
-        
-        
-        //view
+
+        // Header panel
+        headerPanel = new JPanel();
+        headerPanel.setBounds(0, 0, 900, 70);
+        headerPanel.setBackground(Color.decode("#EFCC00"));
+        headerPanel.setLayout(null);
+        add(headerPanel);
+
+        JLabel title = new JLabel("MCS BANK");
+        title.setFont(new Font("Segoe UI", Font.BOLD, 30));
+        title.setForeground(Color.WHITE);
+        title.setBounds(20, 15, 300, 40);
+        headerPanel.add(title);
+
+        backBtn = new JButton("Back");
+        backBtn.setBounds(780, 20, 80, 30);
+        backBtn.setBackground(Color.decode("#EFCC00"));
+        backBtn.setForeground(Color.WHITE);
+        backBtn.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+        backBtn.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        backBtn.addActionListener(this);
+        headerPanel.add(backBtn);
+
+        // Utility Bills button
+        billsBtn = new JButton("Utility Bills");
+        billsBtn.setBounds(180, 400, 220, 50);
+        billsBtn.setFont(new Font("Segoe UI", Font.BOLD, 22));
+        billsBtn.setBackground(Color.decode("#f0ecec"));
+        billsBtn.setForeground(Color.BLACK);
+        billsBtn.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+        billsBtn.addActionListener(this);
+        add(billsBtn);
+
+        // Mobile Packages button
+        mobileBtn = new JButton("Mobile Packages");
+        mobileBtn.setBounds(480, 400, 250, 50);
+        mobileBtn.setFont(new Font("Segoe UI", Font.BOLD, 22));
+        mobileBtn.setBackground(Color.decode("#f0ecec"));
+        mobileBtn.setForeground(Color.BLACK);
+        mobileBtn.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+        mobileBtn.addActionListener(this);
+        add(mobileBtn);
+
+        // Images
+        try {
+            ImageIcon billIcon = new ImageIcon(getClass().getResource("/icons/logo/BILL.png"));
+            Image billImage = billIcon.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+            JLabel billLabel = new JLabel(new ImageIcon(billImage));
+            billLabel.setBounds(200, 160, 200, 200);
+            add(billLabel);
+
+            ImageIcon mobileIcon = new ImageIcon(getClass().getResource("/icons/logo/mobile.png"));
+            Image mobileImage = mobileIcon.getImage().getScaledInstance(220, 220, Image.SCALE_SMOOTH);
+            JLabel mobileLabel = new JLabel(new ImageIcon(mobileImage));
+            mobileLabel.setBounds(510, 150, 220, 220);
+            add(mobileLabel);
+        } catch (Exception e) {
+            System.out.println("Image not found: " + e.getMessage());
+        }
+
         setVisible(true);
     }
-    
-        
-     //Action
-    public void actionPerformed(ActionEvent ae){ 
-        //back action
-        if(ae.getSource()==back) {
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        if (ae.getSource() == backBtn) {
             setVisible(false);
-            new Facilities();
-         }
-        
-        //utility bills action
-        if(ae.getSource()==bills) {
+            new Facilities(cardno);
+        } else if (ae.getSource() == billsBtn) {
             setVisible(false);
-            new Bills();
-         }
-        
-        //mobile packages action
-        if(ae.getSource()==mobile_package) {
+            new Bills(cardno);
+        } else if (ae.getSource() == mobileBtn) {
             setVisible(false);
             new MobPackage();
-         }
-        
-        
+        }
     }
+
     public static void main(String[] args) {
-        new Branchless();
-        
+        new Branchless("231234");
     }
 }

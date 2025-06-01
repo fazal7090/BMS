@@ -22,8 +22,10 @@ public class AccountDetails extends JFrame implements ActionListener {
 
     
     JLabel intro, Details;
-    AccountDetails()
+    String cardno;
+    AccountDetails(String cardno)
     {
+        this.cardno=cardno;
     
         setSize(1350,700);
         setLocation(00,00); setLayout(null);
@@ -128,12 +130,12 @@ public class AccountDetails extends JFrame implements ActionListener {
         if (ae.getSource()==back)
     {
         setVisible(false);
-        new Facilities();
+        new Facilities(cardno);
         
     }}
         
   
     public static void main(String[] args) {
-        new AccountDetails();
+        new AccountDetails("322543");
     }
 }

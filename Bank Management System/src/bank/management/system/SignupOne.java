@@ -2,17 +2,9 @@ package bank.management.system;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.sql.ResultSet;
 import java.util.Random;
-import javax.swing.*;
-import javax.swing.JOptionPane;
-import java.awt.*;    // For printing graphics and images
-import static java.awt.Font.BOLD;
-import java.sql.*;
-import java.awt.event.*;    // For printing graphics and images
-import java.awt.event.ActionListener; 
 
 public class SignupOne extends JFrame implements ActionListener {
 
@@ -20,215 +12,135 @@ public class SignupOne extends JFrame implements ActionListener {
     TextField nameTextField, birthTextField, fnameTextField, stateTextField, pinTextField, cityTextField, addressTextField, emailTextField;
     JRadioButton married, otherGender, female, male, unmarried;
     JButton next, back;
-    JPanel panel;
+    JPanel headerPanel;
     private String cardno;
 
     SignupOne() {
-
-        // Title and Dimensions for Frame
         setTitle("New Account Application Page 1");
-        setVisible(true);
-        setSize(1550, 900);
+        setSize(1000, 750);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLayout(null);
 
-        // Presenting the Background image and setting its length and width
-        ImageIcon backimage = new ImageIcon("icons/Logo1.png");
-        Image backimage1 = backimage.getImage().getScaledInstance(1550, 900, Image.SCALE_DEFAULT);
-        ImageIcon backimage2 = new ImageIcon(backimage1);
+        // Main background panel
+        JPanel background = new JPanel();
+        background.setLayout(null);
+        background.setBounds(0, 0, 1000, 750);
+        background.setBackground(Color.WHITE);
+        add(background);
 
-        // displaying Background image and setting size and dimensions
-        JLabel label4 = new JLabel(backimage2);
-        label4.setBounds(0, 0, 1550, 900);
-        this.add(label4);
+        // Header panel
+        headerPanel = new JPanel();
+        headerPanel.setBounds(0, 0, 1000, 85);
+        headerPanel.setLayout(null);
+        headerPanel.setBackground(Color.decode("#EFCC00"));
+        background.add(headerPanel);
 
-        
-        // panel
-        panel = new JPanel();
-        panel.setBounds(0, 0, 1550, 85);
-        String yellow = "#EFCC00";
-        panel.setLayout(null);
-        panel.setBackground(Color.decode(yellow));
-        label4.add(panel);
+        JLabel heading = new JLabel("BANK Management System");
+        heading.setBounds(260, 10, 700, 70);
+        heading.setForeground(Color.WHITE);
+        heading.setFont(new Font("Segoe UI", Font.BOLD, 42));
+        headerPanel.add(heading);
 
-        // MCS label
-        JLabel MCSe = new JLabel("MCS BANK Management System");
-        MCSe.setBounds(480, 10, 685, 70);
-        MCSe.setForeground(Color.WHITE);
-        MCSe.setFont(new Font("Segoe UI", Font.BOLD, 42));
-        panel.add(MCSe);
+        JLabel personDetails = new JLabel("Add Your Personal Details");
+        personDetails.setFont(new Font("Railway", Font.BOLD, 32));
+        personDetails.setBounds(280, 100, 500, 40);
+        background.add(personDetails);
 
-        // Personal Detail Label
-        JLabel personDetails = new JLabel("Add Your Personal Details ");
-        personDetails.setFont(new Font("Railway", Font.BOLD, 44));
-        personDetails.setBounds(550, 150, 650, 54);
-        personDetails.setForeground(Color.white);
-        label4.add(personDetails);
+        int labelX = 100, fieldX = 300, y = 160, gap = 40;
 
-        // Name Label
-        nameLabel = new JLabel("Name ");
-        nameLabel.setFont(new Font("Railway", Font.BOLD, 18));
-        nameLabel.setBounds(590, 240, 150, 25);
-        nameLabel.setForeground(Color.white);
-        label4.add(nameLabel);
-
-        // Name Text Field
+        nameLabel = new JLabel("Name:");
+        nameLabel.setBounds(labelX, y, 150, 25);
+        background.add(nameLabel);
         nameTextField = new TextField();
-        nameTextField.setBounds(740, 240, 320, 25);
-        nameTextField.setFont(new Font("Railway", Font.BOLD, 16));
-        label4.add(nameTextField);
+        nameTextField.setBounds(fieldX, y, 300, 25);
+        background.add(nameTextField);
 
-        // Father Name Label
-        fnameLabel = new JLabel("Father's Name ");
-        fnameLabel.setFont(new Font("Railway", Font.BOLD, 18));
-        fnameLabel.setBounds(590, 270, 150, 25);
-        fnameLabel.setForeground(Color.white);
-        label4.add(fnameLabel);
-
-        // Father Name Text Field
+        fnameLabel = new JLabel("Father's Name:");
+        fnameLabel.setBounds(labelX, y += gap, 150, 25);
+        background.add(fnameLabel);
         fnameTextField = new TextField();
-        fnameTextField.setBounds(740, 270, 320, 25);
-        fnameTextField.setFont(new Font("Railway", Font.BOLD, 16));
-        label4.add(fnameTextField);
+        fnameTextField.setBounds(fieldX, y, 300, 25);
+        background.add(fnameTextField);
 
-        // Date of Birth Label
-        dBirth = new JLabel("Date Of Birth ");
-        dBirth.setFont(new Font("Railway", Font.BOLD, 18));
-        dBirth.setBounds(590, 300, 150, 25);
-        dBirth.setForeground(Color.white);
-        label4.add(dBirth);
-
-        // Date of Birth Text Field
+        dBirth = new JLabel("Date Of Birth:");
+        dBirth.setBounds(labelX, y += gap, 150, 25);
+        background.add(dBirth);
         birthTextField = new TextField();
-        birthTextField.setBounds(740, 300, 320, 25);
-        birthTextField.setFont(new Font("Railway", Font.BOLD, 16));
-        label4.add(birthTextField);
+        birthTextField.setBounds(fieldX, y, 300, 25);
+        background.add(birthTextField);
 
-        // email Label
-        email = new JLabel("Email Address ");
-        email.setFont(new Font("Railway", Font.BOLD, 18));
-        email.setBounds(590, 330, 150, 25);
-        email.setForeground(Color.white);
-        label4.add(email);
-
-        // email Text Field
+        email = new JLabel("Email Address:");
+        email.setBounds(labelX, y += gap, 150, 25);
+        background.add(email);
         emailTextField = new TextField();
-        emailTextField.setBounds(740, 330, 320, 25);
-        emailTextField.setFont(new Font("Railway", Font.BOLD, 16));
-        label4.add(emailTextField);
+        emailTextField.setBounds(fieldX, y, 300, 25);
+        background.add(emailTextField);
 
-        // Address Label
-        addressLabel = new JLabel("Address ");
-        addressLabel.setFont(new Font("Railway", Font.BOLD, 18));
-        addressLabel.setForeground(Color.white);
-        addressLabel.setBounds(590, 360, 150, 25);
-        label4.add(addressLabel);
-
-        // Address Text Field
+        addressLabel = new JLabel("Address:");
+        addressLabel.setBounds(labelX, y += gap, 150, 25);
+        background.add(addressLabel);
         addressTextField = new TextField();
-        addressTextField.setBounds(740, 360, 320, 25);
-        addressTextField.setFont(new Font("Railway", Font.BOLD, 16));
-        label4.add(addressTextField);
+        addressTextField.setBounds(fieldX, y, 300, 25);
+        background.add(addressTextField);
 
-        // City Label
-        cityLabel = new JLabel("City ");
-        cityLabel.setFont(new Font("Railway", Font.BOLD, 18));
-        cityLabel.setForeground(Color.white);
-        cityLabel.setBounds(590, 390, 150, 25);
-        label4.add(cityLabel);
-
-        // City Text Field
+        cityLabel = new JLabel("City:");
+        cityLabel.setBounds(labelX, y += gap, 150, 25);
+        background.add(cityLabel);
         cityTextField = new TextField();
-        cityTextField.setBounds(740, 390, 320, 25);
-        cityTextField.setFont(new Font("Railway", Font.BOLD, 16));
-        label4.add(cityTextField);
+        cityTextField.setBounds(fieldX, y, 300, 25);
+        background.add(cityTextField);
 
-        // State Label
-        StateLabel = new JLabel("State ");
-        StateLabel.setFont(new Font("Railway", Font.BOLD, 18));
-        StateLabel.setForeground(Color.white);
-        StateLabel.setBounds(590, 420, 150, 25);
-        label4.add(StateLabel);
-
-        // State Text Field
+        StateLabel = new JLabel("State:");
+        StateLabel.setBounds(labelX, y += gap, 150, 25);
+        background.add(StateLabel);
         stateTextField = new TextField();
-        stateTextField.setBounds(740, 420, 320, 25);
-        stateTextField.setFont(new Font("Railway", Font.BOLD, 16));
-        label4.add(stateTextField);
+        stateTextField.setBounds(fieldX, y, 300, 25);
+        background.add(stateTextField);
 
-        // Marital Status Label
-        maritalLabel = new JLabel("Marital Status ");
-        maritalLabel.setFont(new Font("Railway", Font.BOLD, 18));
-        maritalLabel.setForeground(Color.white);
-        maritalLabel.setBounds(590, 450, 150, 25);
-        label4.add(maritalLabel);
-
-        // Radio Buttons for Marital Status
-
-        // For Married
+        maritalLabel = new JLabel("Marital Status:");
+        maritalLabel.setBounds(labelX, y += gap, 150, 25);
+        background.add(maritalLabel);
         married = new JRadioButton("Married");
-        married.setBackground(Color.white);
-        married.setBounds(740, 450, 100, 25);
-        label4.add(married);
-
-        // For Unmarried
         unmarried = new JRadioButton("Unmarried");
-        unmarried.setBackground(Color.white);
-        unmarried.setBounds(850, 450, 100, 25);
-        label4.add(unmarried);
-
-        // For only single option selection
         ButtonGroup maritalGroup = new ButtonGroup();
         maritalGroup.add(married);
         maritalGroup.add(unmarried);
+        married.setBounds(fieldX, y, 100, 25);
+        unmarried.setBounds(fieldX + 120, y, 100, 25);
+        background.add(married);
+        background.add(unmarried);
 
-        // Gender Label
-        genderLabel = new JLabel("Gender ");
-        genderLabel.setFont(new Font("Railway", Font.BOLD, 18));
-        genderLabel.setBounds(590, 480, 150, 25);
-        genderLabel.setForeground(Color.WHITE);
-        label4.add(genderLabel);
-
-        // Radio Buttons for Marital Status
-
-        // For Male
+        genderLabel = new JLabel("Gender:");
+        genderLabel.setBounds(labelX, y += gap, 150, 25);
+        background.add(genderLabel);
         male = new JRadioButton("Male");
-        male.setBackground(Color.white);
-        male.setBounds(740, 480, 100, 25);
-        label4.add(male);
-
-        // For Female
         female = new JRadioButton("Female");
-        female.setBackground(Color.white);
-        female.setBounds(850, 480, 100, 25);
-        label4.add(female);
-
-        // For Others
         otherGender = new JRadioButton("Others");
-        otherGender.setBackground(Color.white);
-        otherGender.setBounds(960, 480, 100, 25);
-        label4.add(otherGender);
-
-        // For only single option selection
         ButtonGroup genderGroup = new ButtonGroup();
         genderGroup.add(male);
         genderGroup.add(female);
         genderGroup.add(otherGender);
+        male.setBounds(fieldX, y, 80, 25);
+        female.setBounds(fieldX + 90, y, 80, 25);
+        otherGender.setBounds(fieldX + 180, y, 80, 25);
+        background.add(male);
+        background.add(female);
+        background.add(otherGender);
 
-        // Back Button
         back = new JButton("BACK");
-        back.setBounds(630, 580, 180, 40);
+        back.setBounds(300, y += gap + 20, 120, 35);
         back.addActionListener(this);
-        label4.add(back);
+        background.add(back);
 
-        // Adding Next Button
-        next = new JButton("Next");
-        next.setBounds(850, 580, 180, 40);
+        next = new JButton("NEXT");
+        next.setBounds(450, y, 120, 35);
         next.addActionListener(this);
-        label4.add(next);
-        
-          getContentPane().setBackground(Color.BLACK);
+        background.add(next);
+
+        setVisible(true);
     }
 
-    // Implementing the Abstract method
     public String getCardno() {
         return cardno;
     }
@@ -237,113 +149,64 @@ public class SignupOne extends JFrame implements ActionListener {
         this.cardno = cardno;
     }
 
-    public boolean checkcardno(String cardno)
-    {
+    public boolean checkcardno(String cardno) {
         try {
-            // instatiate the connection class
             DataConnection c = new DataConnection();
-
             ResultSet rs = c.s.executeQuery("SELECT * FROM MainTable WHERE cardno = '" + cardno + "'");
-
-            if (rs.next()) {
-
-                return true;
-
-            }
+            return rs.next();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-            catch (Exception e) {
-                    System.out.println(e);
-
-                }
-            return false;
-        
+        return false;
     }
-    public void actionPerformed(ActionEvent ae) {
 
-        // Alloting some Card number and details
+    public void actionPerformed(ActionEvent ae) {
         Random ran = new Random();
         String cardno = "" + Math.abs((ran.nextLong() % 900L) + 504093L);
-        while (checkcardno(cardno)==true)
-        {
-             cardno = "" + Math.abs((ran.nextLong() % 900L) + 504093L);
-           
+        while (checkcardno(cardno)) {
+            cardno = "" + Math.abs((ran.nextLong() % 900L) + 504093L);
         }
-       
-                setCardno(cardno);
-                String pin = "" + Math.abs((ran.nextLong() % 9000L) + 1000L);
-                CardNo.cardno = getCardno();
-                String name = nameTextField.getText();
-                String fName = fnameTextField.getText();
-                String dob = birthTextField.getText();
-                String state = stateTextField.getText();
-                String city = cityTextField.getText();
-                String address = addressTextField.getText();
-                String email = emailTextField.getText();
-                cardno = getCardno();
-                int bal=0;
 
-                // For Radio Button Gender
-                String gender = null;
+        setCardno(cardno);
+        String pin = "" + Math.abs((ran.nextLong() % 9000L) + 1000L);
+        CardNo.cardno = getCardno();
 
-                if (male.isSelected()) {
-                    gender = "male";
-                } else if (female.isSelected()) {
-                    gender = "female ";
-                } else if (otherGender.isSelected()) {
-                    gender = " other";
-                }
+        String name = nameTextField.getText();
+        String fName = fnameTextField.getText();
+        String dob = birthTextField.getText();
+        String state = stateTextField.getText();
+        String city = cityTextField.getText();
+        String address = addressTextField.getText();
+        String email = emailTextField.getText();
+        int bal = 0;
 
-                // For Marital status Button
-                String marital = null;
-                if (married.isSelected()) {
-                    marital = "married";
-                } else if (unmarried.isSelected()) {
-                    marital = "unmarried";
-                }
+        String gender = male.isSelected() ? "male" : female.isSelected() ? "female" : otherGender.isSelected() ? "other" : null;
+        String marital = married.isSelected() ? "married" : unmarried.isSelected() ? "unmarried" : null;
 
-                // Exceptional Handling
-
-                try {
-
-                    // User wants to go back to the previous page
-                    if (ae.getSource() == back) {
-                        this.setVisible(false);
-                        new login().setVisible(true);
-                    } else {
-                        if (name.equals("") || fName.equals("") || dob.equals("") || state.equals("") || city.equals("")
-                                || address.equals("") || email.equals("")) {
-                            // If the user presses next without entering his details
-                            JOptionPane.showMessageDialog(null, "Please enter your details!");
-                        } else {
-                            if (ae.getSource() == next) {
-                                
-                                 DataConnection con = new DataConnection();
-
-                            // Writing mySQL Query
+        try {
+            if (ae.getSource() == back) {
+                setVisible(false);
+                new login().setVisible(true);
+            } else {
+                if (name.isEmpty() || fName.isEmpty() || dob.isEmpty() || state.isEmpty() || city.isEmpty() || address.isEmpty() || email.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Please enter your details!");
+                } else {
+                    DataConnection con = new DataConnection();
                     String query = "INSERT INTO MainTable VALUES('" + cardno + "','" + name + "' , '" + fName
-    + "' , '" + dob + "' , '" + state + "' , '" + city + "'  ,'" + address + "' , '"
-    + email + "' , '" + gender + "' ,'" + marital + "','" + pin + "','" + bal + "')";
-
-
-                            // Executing mySQL Query
-                            con.s.executeUpdate(query);
-                            
-                                 JOptionPane.showMessageDialog(null,"The 6 digit Account number generated for your account is "+ getCardno() + " \nThe 4 digit pin generated for your account is "+ pin );
-                          setVisible(false);
-                          new AddMoney(cardno);
-                            
-                           
-                        }
-                    }
-                    }
-                } catch (Exception e) {
-                    System.out.println(e);
-
+                            + "' , '" + dob + "' , '" + state + "' , '" + city + "'  ,'" + address + "' , '"
+                            + email + "' , '" + gender + "' ,'" + marital + "','" + pin + "','" + bal + "')";
+                    con.s.executeUpdate(query);
+                    JOptionPane.showMessageDialog(null, "The 6 digit Account number generated for your account is " + getCardno() + " \nThe 4 digit pin generated for your account is " + pin);
+                    setVisible(false);
+                    new AddMoney(cardno);
                 }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-           
 
     public static void main(String[] args) {
-        SignupOne a=new SignupOne();
+        new SignupOne();
     }
 }

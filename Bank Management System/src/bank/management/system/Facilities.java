@@ -12,12 +12,12 @@ public class Facilities extends JFrame implements ActionListener {
      JLabel intro1;
      JButton accountdetails, logout, update, personalloan, fundtransfer, inttransaction, consumerloan, busloans, branchless, creditcard, advsalary, schtransfer, ticket, savingplan, balinquiry;
      JComboBox acc;
-     int accno;
+     String accno;
      String cardno;
     Facilities(String cardno){
         //frame
         this.cardno=cardno;
-        accno=Integer.parseInt(cardno);
+        accno=cardno;
         setSize(1550,850);
         setLayout(null);
         setTitle("MCS BANK Facilities");
@@ -51,7 +51,7 @@ public class Facilities extends JFrame implements ActionListener {
         logout=new JButton("LogOut");
         Font font1=new Font("Segoe UI", BOLD, 24);
         logout.setFont(font1);
-        logout.setBounds(1400,20,110,35);
+        logout.setBounds(1000,20,110,35);
         logout.setBackground(Color.decode(yellow));
         logout.setBorder(BorderFactory.createLineBorder(Color.decode(yellow)));
         logout.setForeground(Color.WHITE);
@@ -211,6 +211,16 @@ public class Facilities extends JFrame implements ActionListener {
         add(savingplan);
         
         
+        JButton quick = new JButton("Quick Transfer");
+Font font14 = new Font("Segoe UI", BOLD, 17);
+quick.setFont(font14);
+quick.setBounds(1100, 675, 150, 30);
+quick.setBorder(BorderFactory.createLineBorder(Color.decode(c)));
+quick.setBackground(Color.decode(c));
+quick.setForeground(Color.BLACK);
+quick.addActionListener(this);
+add(quick);
+        
         //images
          
         //personal loan image
@@ -325,10 +335,10 @@ public class Facilities extends JFrame implements ActionListener {
         // instantiate the connection class
         DataConnection c = new DataConnection();
 
-        ResultSet rs = c.s.executeQuery("SELECT * FROM creditcard WHERE cardno = '" + accno + "'");
+        ResultSet rs = c.s.executeQuery("SELECT * FROM creditcard WHERE accno = '" + accno + "'");
 
        if (rs.next()) {
-    String cardNo = rs.getString("cardno");
+    String cardNo = rs.getString("accno");
     String jobTitle = rs.getString("jobtitle");
     String empType = rs.getString("emptype");
     String selectCredit = rs.getString("selectcredit");
@@ -342,6 +352,7 @@ public class Facilities extends JFrame implements ActionListener {
 
     // Display the data in a JOptionPane
     JOptionPane.showMessageDialog(null, message, "Credit Card Details", JOptionPane.INFORMATION_MESSAGE);
+    new Facilities(cardno);
 }
        else {
            new CreditCard(cardno);
@@ -352,7 +363,7 @@ public class Facilities extends JFrame implements ActionListener {
     } catch (Exception e) {
         System.out.println(e);
     }
-            new Facilities(cardno);
+           
          }
         
         if(ae.getSource()==fundtransfer) {
@@ -363,24 +374,24 @@ public class Facilities extends JFrame implements ActionListener {
         //personal loan action
         if(ae.getSource()==personalloan) {
             setVisible(false);
-            new PersonalLoan();
+            new PersonalLoan(cardno);
          }
         
         //consumer loan action
         if(ae.getSource()==consumerloan) {
             setVisible(false);
-            new ConsumerLoan();
+            new ConsumerLoan(cardno);
          }
         //busuiness loan action
         if(ae.getSource()==busloans) {
             setVisible(false);
-            new BusinessLoan();
+            new BusinessLoan(cardno);
          }
         
         //branchless banking option action
         if(ae.getSource()==branchless) {
             setVisible(false);
-            new Branchless();
+            new Branchless(cardno);
          }
         
         //logout option action
@@ -392,16 +403,16 @@ public class Facilities extends JFrame implements ActionListener {
         //accountdetails option action
         if(ae.getSource()==accountdetails) {
             setVisible(false);
-//            new SignupOne();
+            new Details(cardno);
          }
         if(ae.getSource()==inttransaction){
             setVisible(false);
-            new CurrencyConversion();
+           new CurrencyConversion();
         }
         
         if(ae.getSource()==savingplan){
             setVisible(false);
-        new savingplan();
+        new savingplan(cardno);
         }
         if(ae.getSource()==advsalary){
             setVisible(false);
@@ -424,12 +435,12 @@ public class Facilities extends JFrame implements ActionListener {
             String res=null, res1=null;
             DataConnection db=new DataConnection();
              try {
-                            String query = "SELECT acc_no, balance FROM Balance WHERE acc_no='"+CardNo.cardno+"'";
+                            String query = "SELECT cardno, bal FROM MainTable WHERE cardno='"+cardno+"'";
                             ResultSet rs=db.s.executeQuery(query);
 
                             while (rs.next()) {
-                                res = rs.getString("acc_no");
-                                res1 = rs.getString("balance");
+                                res = rs.getString("cardno");
+                                res1 = rs.getString("bal");
                       }
          
                 } catch (Exception e) {
@@ -439,11 +450,11 @@ public class Facilities extends JFrame implements ActionListener {
          }
         if(ae.getSource()==accountdetails){
             setVisible(false);
-        new Details();
+        new Details(cardno);
         }
       
     }
     public static void main(String[] args) {
-        Facilities a=new Facilities("504839");
+        Facilities a=new Facilities("503721");
     }
 }
