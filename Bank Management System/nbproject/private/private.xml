@@ -3,38 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ECHO%20TECH/Documents/NetBeansProjects/Bank%20Management%20System/src/bank/management/system/login.java</file>
-            <file>file:/C:/Users/ECHO%20TECH/Documents/NetBeansProjects/Bank%20Management%20System/src/bank/management/system/Visa.java</file>
-            <file>file:/C:/Users/ECHO%20TECH/Documents/NetBeansProjects/Bank%20Management%20System/src/bank/management/system/CreditCard.java</file>
-            <file>file:/C:/Users/ECHO%20TECH/Documents/NetBeansProjects/Bank%20Management%20System/src/icons/MCSBackgroun.png</file>
-            <file>file:/C:/Users/ECHO%20TECH/Documents/NetBeansProjects/Bank%20Management%20System/src/bank/management/system/AccountDetails.java</file>
-            <file>file:/C:/Users/ECHO%20TECH/Documents/NetBeansProjects/Bank%20Management%20System/src/bank/management/system/Facilities.java</file>
-            <file>file:/C:/Users/ECHO%20TECH/Documents/NetBeansProjects/Bank%20Management%20System/src/bank/management/system/Branchless.java</file>
-            <file>file:/C:/Users/ECHO%20TECH/Documents/NetBeansProjects/Bank%20Management%20System/src/icons/background.png</file>
-            <file>file:/C:/Users/ECHO%20TECH/Documents/NetBeansProjects/Bank%20Management%20System/src/bank/management/system/Schedule.java</file>
-            <file>file:/C:/Users/ECHO%20TECH/Documents/NetBeansProjects/Bank%20Management%20System/src/bank/management/system/Tickets.java</file>
-            <file>file:/C:/Users/ECHO%20TECH/Documents/NetBeansProjects/Bank%20Management%20System/src/bank/management/system/WithdrawDeposit.java</file>
-            <file>file:/C:/Users/ECHO%20TECH/Documents/NetBeansProjects/Bank%20Management%20System/src/bank/management/system/DataConnection.java</file>
-            <file>file:/C:/Users/ECHO%20TECH/Documents/NetBeansProjects/Bank%20Management%20System/src/icons/MCSBackgroun_1.png</file>
-            <file>file:/C:/Users/ECHO%20TECH/Documents/NetBeansProjects/Bank%20Management%20System/src/bank/management/system/platinum.java</file>
-            <file>file:/C:/Users/ECHO%20TECH/Documents/NetBeansProjects/Bank%20Management%20System/src/bank/management/system/CardNo.java</file>
-            <file>file:/C:/Users/ECHO%20TECH/Documents/NetBeansProjects/Bank%20Management%20System/src/bank/management/system/BusinessLoan.java</file>
-            <file>file:/C:/Users/ECHO%20TECH/Documents/NetBeansProjects/Bank%20Management%20System/src/bank/management/system/ConsumerLoan.java</file>
-            <file>file:/C:/Users/ECHO%20TECH/Documents/NetBeansProjects/Bank%20Management%20System/src/bank/management/system/TicketReservation.java</file>
-            <file>file:/C:/Users/ECHO%20TECH/Documents/NetBeansProjects/Bank%20Management%20System/src/bank/management/system/Bus.java</file>
-            <file>file:/C:/Users/ECHO%20TECH/Documents/NetBeansProjects/Bank%20Management%20System/src/bank/management/system/AddMoney.java</file>
-            <file>file:/C:/Users/ECHO%20TECH/Documents/NetBeansProjects/Bank%20Management%20System/src/bank/management/system/Details.java</file>
-            <file>file:/C:/Users/ECHO%20TECH/Documents/NetBeansProjects/Bank%20Management%20System/src/bank/management/system/Gold.java</file>
-            <file>file:/C:/Users/ECHO%20TECH/Documents/NetBeansProjects/Bank%20Management%20System/src/bank/management/system/Bills.java</file>
-            <file>file:/C:/Users/ECHO%20TECH/Documents/NetBeansProjects/Bank%20Management%20System/src/bank/management/system/MobPackage.java</file>
-            <file>file:/C:/Users/ECHO%20TECH/Documents/NetBeansProjects/Bank%20Management%20System/src/bank/management/system/Pink.java</file>
-            <file>file:/C:/Users/ECHO%20TECH/Documents/NetBeansProjects/Bank%20Management%20System/src/bank/management/system/SignupOne.java</file>
-            <file>file:/C:/Users/ECHO%20TECH/Documents/NetBeansProjects/Bank%20Management%20System/src/bank/management/system/AdvanceSalary.java</file>
-            <file>file:/C:/Users/ECHO%20TECH/Documents/NetBeansProjects/Bank%20Management%20System/src/bank/management/system/FundsTransfer1.java</file>
-            <file>file:/C:/Users/ECHO%20TECH/Documents/NetBeansProjects/Bank%20Management%20System/src/icons/Logo1.png</file>
-            <file>file:/C:/Users/ECHO%20TECH/Documents/NetBeansProjects/Bank%20Management%20System/src/bank/management/system/PersonalLoan.java</file>
-            <file>file:/C:/Users/ECHO%20TECH/Documents/NetBeansProjects/Bank%20Management%20System/src/bank/management/system/CurrencyConversion.java</file>
-            <file>file:/C:/Users/ECHO%20TECH/Documents/NetBeansProjects/Bank%20Management%20System/src/bank/management/system/savingplan.java</file>
+            <file>file:/C:/Users/mfaza/Desktop/SQE%20project/BMS/Bank%20Management%20System/src/bank/management/system/login.java</file>
+            <file>file:/C:/Users/mfaza/Desktop/SQE%20project/BMS/Bank%20Management%20System/src/bank/management/system/PersonalLoan.java</file>
+            <file>file:/C:/Users/mfaza/Desktop/SQE%20project/BMS/Bank%20Management%20System/src/bank/management/system/BusinessLoan.java</file>
+            <file>file:/C:/Users/mfaza/Desktop/SQE%20project/BMS/Bank%20Management%20System/src/bank/management/system/ConsumerLoan.java</file>
+            <file>file:/C:/Users/mfaza/Desktop/SQE%20project/BMS/Bank%20Management%20System/src/bank/management/system/FundsTransfer1.java</file>
+            <file>file:/C:/Users/mfaza/Desktop/SQE%20project/BMS/Bank%20Management%20System/src/bank/management/system/Facilities.java</file>
+            <file>file:/C:/Users/mfaza/Desktop/SQE%20project/BMS/Bank%20Management%20System/src/bank/management/system/SignupOne.java</file>
         </group>
     </open-files>
 </project-private>
